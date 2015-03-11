@@ -48,6 +48,11 @@ public class User implements Comparable<User>{
 		_email=mail;
 	}
 	
+	public String toString(){
+		return "User [userId="+_id +", userName=" +_name
+				+", userEmail=" +_email +"]";
+	}
+	
 	
 	
 	public String get_name() {
