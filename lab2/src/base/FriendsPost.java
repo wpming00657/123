@@ -4,10 +4,19 @@ import java.util.Date;
 
 public class FriendsPost extends Post{
 
-	public FriendsPost(Date d, String c) {
+	private User friend;
+	
+	public FriendsPost(Date d, String c,User friend) {
 		super(d, c);
+		this.friend=friend;
 		// TODO Auto-generated constructor stub
 	}
+	
+	public String toString(){
+		return "User [userId="+friend.get_id() +", userName=" +friend.get_name()
+				+", userEmail=" +friend.get_email() + "]\n"
+				+super.toString();
+	}
 
-	private User friend;
+	
 }
