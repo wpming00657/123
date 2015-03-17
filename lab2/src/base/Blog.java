@@ -1,8 +1,9 @@
 package base;
 
+import java.io.*;
 import java.util.ArrayList;
 
-public class Blog {
+public class Blog implements Serializable{
 
 	private User _user;
 	private ArrayList<Post> allPosts;
@@ -87,6 +88,36 @@ public class Blog {
 		
 	}
 	
+	public void save (String filepath) {
+		try {
+			FileOutputStream output =new FileOutputStream(filepath);
+			ObjectOutputStream out=new ObjectOutputStream(output);
+			out.writeObject(this);
+			out.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
 	
+	public void load(String filepath) {
+		try {
+			FileInputStream input = new FileInputStream(filepath);
+			ObjectInputStream in =new ObjectInputStream(input);
+			Blog blogin=(Blog) in.readObject();
+			this._user=blogin.get_user();
+			this.allPosts=blogin.getAllPosts();
+			in.close();
+			
+		} catch (FileNotFoundException  e) {
+			// TODO Auto-generated catch block
+			System.out.println("Wait! There is something wrong.I cannot find the file.");
+		} catch (IOException |ClassNotFoundException  e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+	}
 	
 }
