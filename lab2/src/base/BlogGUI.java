@@ -32,9 +32,12 @@ public class BlogGUI implements ActionListener{
 		mainFrame.setLayout(new GridLayout(2,1));
 		
 		postText = new JTextArea(10,300);
+		postText.setLineWrap(true);
 		postText.setBackground(Color.lightGray);
 		display = new JLabel("You can still input 140 characters");
 		postContent=new JTextArea("Here is the Post!");
+		postContent.setLineWrap(true);
+		postContent.setWrapStyleWord(true);
 		JScrollPane ps=new JScrollPane(postContent);
 		refresh = new JButton("Refresh");
 		post = new JButton("Post");
@@ -58,6 +61,7 @@ public class BlogGUI implements ActionListener{
 		post.addActionListener(new postListener());
 		refresh.addActionListener(new refreshListener());
 		postText.addKeyListener(new lengthListener());
+		mainFrame.setLocationRelativeTo(null);
 	}
 	
 	public static void main(String[] args){
@@ -81,10 +85,15 @@ public class BlogGUI implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			String content = postText.getText();
-			Date date = new Date();
-			Post post =new Post(date,content);
-			myBlog.post(post);
-			myBlog.save("E:/a.blog");
+			if(content.length()<140 && postText.getText().length()>0){
+				Date date = new Date();
+				Post post =new Post(date,content);
+				myBlog.post(post);
+				myBlog.save("E:/a.blog");
+			}else{
+				display.setText("Post failed! post length must >0 and < 140");
+			}
+			
 			
 		}
 		
