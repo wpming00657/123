@@ -23,6 +23,15 @@ public class Blog implements Serializable{
 			System.out.println("Post["+i++ +"]:"+temp.toString());
 		}
 	}
+	public String list1(){
+		String out="";
+		int i=0;
+		for(Post temp:allPosts){
+			out+=("Post["+i++ +"]:"+temp.toString()+"\n");
+		}
+		return out;
+		
+	}
 	
 	public void delete(int index){
 		try{
